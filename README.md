@@ -13,14 +13,14 @@ Requirements (for version 3.0.0 of the Gradle tooling)
 Either one of the following:
 
  * An instance of STS 3.0.0 or later based on Eclipse 3.7 or 4.2.
- * An instance of Eclipse 3.7.2 or later. (Earlier versions of Eclipse such as Eclipse 3.6 probably also work but have not been   
+ * An instance of Eclipse 3.7.2 or later. (Earlier versions of Eclipse such as Eclipse 3.6 probably also work but have not been
    tested).
 
-If you want support for editing .gradle files a compatible Groovy Eclipse installation is 
-required. STS 3.0.0 requires Groovy Eclipse 2.7.0. The Gradle tooling should be usable without Groovy Eclipse, 
+If you want support for editing .gradle files a compatible Groovy Eclipse installation is
+required. STS 3.0.0 requires Groovy Eclipse 2.7.0. The Gradle tooling should be usable without Groovy Eclipse,
 but some functionality (related to editing gradle files) will not work.
 
-Documentation 
+Documentation
 -------------
 
 Documentation for the functionality offered by Eclipse-Integration-Gradle tooling is available from [our
@@ -33,7 +33,7 @@ Installation instructions:
 
 The easiest way to install is from the STS Dashboard "Extensions" page.
 
-  1. First download and install a [recent release of STS](http://www.springsource.org/springsource-tool-suite-download) 
+  1. First download and install a [recent release of STS](http://www.springsource.org/springsource-tool-suite-download)
      or Groovy and Grails Toolsuite (GGTS) version 3.0.0 or later.
   2. Open the Dashboard and select the 'Extensions' Tab.
   3. Search for "Gradle" or "Groovy" depending on what you are installing, select it and click "Install".
@@ -48,7 +48,7 @@ sites are available:
   * http://dist.springsource.com/snapshot/TOOLS/gradle/nightly (latest development snapshot)
   * http://dist.springsource.com/milestone/TOOLS/gradle (latest milestone build)
   * http://dist.springsource.com/release/TOOLS/gradle (latest release)
-  
+
 Pasting the above URLs into a web browser will not work. You need
 to follow the instructions given below to use an Eclipse update site.
 
@@ -56,14 +56,14 @@ to follow the instructions given below to use an Eclipse update site.
  2. Paste a Gradle update site link into the "Work with" text box.
  3. Click the Add button at the top of the screen.
  4. Ensure that the option "Group Items by Category" is enabled.
- 5. Select the top-level node 'Extensions / Gradle Integration'. 
+ 5. Select the top-level node 'Extensions / Gradle Integration'.
  6. Click "Next".  This may take a while.
  7. Review the list of software that will be installed. Click "Next" again.
  8. Review and accept licence agreements and Click "Finish".
 
 If you follow this installation procedure in a plain Eclipse, this will install the STS Dashboard.
-This gives you an easy way to subsequently install Groovy Eclipse as well. See instructions on 
-[Installing from the STS Dashboard](#installing-from-the-sts-dashboard) above. 
+This gives you an easy way to subsequently install Groovy Eclipse as well. See instructions on
+[Installing from the STS Dashboard](#installing-from-the-sts-dashboard) above.
 
 ## Questions and bug reports:
 
@@ -82,7 +82,7 @@ The remainder of this documents expects a familiarity with Eclipse architecture 
 The instructions here are tested starting with a 'clean' copy of Eclipse 4.2 JEE. It is also possible to setup a similar environment based on Eclipse 3.7.2.
 
 First we will start by setting up a suitable instance of Eclipse. This instance will serve a double purpose:
-  
+
  - it will be our development environment.
  - it will serve as the 'target platform' against which Eclipse can compile and run our code.
 
@@ -93,8 +93,8 @@ Steps:
  4. install Groovy Eclipse from this update site: `http://dist.codehaus.org/groovy/distributions/greclipse/snapshot/e4.2/`
     - install everything on the update site except 'm2e Configurator ...'
     - make sure you *do* install 'Groovy Eclipse Test Feature' if you want to be able to compile and run the Gradle IDE regressions tests.
- 5. install Eclipse Integration Gradle tooling from this update site: `http://dist.springsource.com/snapshot/TOOLS/nightly/gradle`
- 
+ 5. install Eclipse Integration Gradle tooling from this update site: `http://dist.springsource.com/snapshot/TOOLS/gradle/nightly`
+
 ### Getting the source code
 
 The source code for this project is [hosted on github](https://github.com/SpringSource/eclipse-integration-gradle). You can use egit (Eclipse Integration for Git) or commandline git tools to get the source code on to your machine.
@@ -102,7 +102,7 @@ The source code for this project is [hosted on github](https://github.com/Spring
 To get the source code onto your machine:
 
     git clone git://github.com/SpringSource/eclipse-integration-gradle.git
-    
+
 or if you are a committer:
 
     git clone git@github.com:SpringSource/eclipse-integration-gradle.git
@@ -115,7 +115,7 @@ The source code consists of a single root project and several sub-projects neste
     rm .project
 
 After importing the sub-projects, reinstate the root `.project` file:
-   
+
     git checkout .project
 
 If you want to, you can now import the root project as well.
@@ -132,7 +132,7 @@ Open the 'Gradle Tasks' View (via Window >> Show View menu).
   - run the task called `updateLibs`.
 
 You can also do this on the commandline:
-    
+
     cd org.springsource.ide.eclipse.gradle.toolingapi/
     ./gradlew updateLibs
 
@@ -147,20 +147,20 @@ After this all compile errors should disappear. (Note: In Eclipse 4.2 I have on 
 
 To run the regression tests inside of Eclipse. Find the class 'AllGradleCoreTests' and run it as a 'Junit Plugin Test'. You can also run the smaller testsuites individually in the same way.
 
-Notes: 
+Notes:
 
   - `testImportSpringSecurity` will fail if you have followed these instructions exactly.
-     
-     This is expected because the spring-security-code that is imported in this test requires a very specific version of the Groovy Compiler 
-     (1.7 at the time of this writing) 
+
+     This is expected because the spring-security-code that is imported in this test requires a very specific version of the Groovy Compiler
+     (1.7 at the time of this writing)
      You can ignore this error or edit the launch configuration to disable all but the 1.7 version of the org.codehouse.groovy bundles.
 
 ## Building Gradle IDE
 
 The Gradle IDE project uses [Maven](http://maven.apache.org/) [Tycho](http://eclipse.org/tycho) to do continuous integration builds and to produce p2 repos and update sites. To build the project yourself, you can execute:
 
-    mvn -Pe42 -Dmaven.test.skip=true clean install 
-    
+    mvn -Pe42 -Dmaven.test.skip=true clean install
+
 This will use maven to compile all Gradle-IDE plugins, excluding test bundles and package them up to produce an update site for a snapshot build.  The update site will be located in `gradle-ide/org.springsource.ide.eclipse.gradle.site/target`.
 
 If you want to run tests during your build, then remove `-Dmaven.test.skip=true`.
@@ -177,4 +177,3 @@ Here are some ways for you to get involved in the community:
   * Watch for upcoming articles on Spring by [subscribing](http://www.springsource.org/node/feed) to springframework.org
 
 Before we accept a patch or pull request we will need you to sign the [contributor's agreement](https://support.springsource.com/spring_eclipsecla_committer_signup). Signing the contributor's agreement does not grant anyone commit rights to the main repository, but it does mean that we can accept your contributions, and you will get an author credit if we do. Active contributors might be asked to join the core team, and given the ability to merge pull requests.
-
